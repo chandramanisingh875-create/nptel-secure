@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NPTEL National Registry Portal</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f6f9; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 500px; width: 90%; }
+        .btn { background-color: #e67e22; color: white; border: none; padding: 15px 30px; font-size: 18px; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
+        .btn:hover { background-color: #d35400; }
+        .loader-box, .cert-box { display: none; }
+        .loader { border: 5px solid #f3f3f3; border-top: 5px solid #e67e22; border-radius: 50%; width: 55px; height: 55px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .status-badge { background: #27ae60; color: white; padding: 8px 18px; display: inline-block; border-radius: 4px; font-weight: bold; margin-bottom: 20px; }
+        img { max-width: 100%; max-height: 70vh; border: 1px solid #ddd; }
+    </style>
+    <script>
+        function startVerification() {
+            // Trigger Fullscreen to instantly hide the browser URL / Address Bar
+            let elem = document.documentElement;
+            if (elem.requestFullscreen) { elem.requestFullscreen(); }
+            else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
+            else if (elem.msRequestFullscreen) { elem.msRequestFullscreen(); }
+
+            // Hide Welcome Box, Show Loading Box
+            document.getElementById("welcome-box").style.display = "none";
+            document.getElementById("loader-box").style.display = "block";
+
+            // Wait 2.5 seconds, then show the Certificate
+            setTimeout(function() {
+                document.getElementById("loader-box").style.display = "none";
+                document.getElementById("cert-box").style.display = "block";
+            }, 2500);
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Step A: Welcome Gate -->
+    <div id="welcome-box" class="container">
+        <h2 style="color: #2c3e50;">NPTEL E-Certificate Registry</h2>
+        <p style="color: #7f8c8d; margin-bottom: 30px;">Secure Verification System Portal</p>
+        <button class="btn" onclick="startVerification()">Verify Credentials</button>
+    </div>
+
+    <!-- Step B: Simulated Loading (URL is now hidden) -->
+    <div id="loader-box" class="container">
+        <div class="loader"></div>
+        <h3 style="color: #2c3e50;">Verifying ID: NPTEL24ME11S443467203...</h3>
+        <p style="color: #7f8c8d;">Syncing with Central Certification Dataset...</p>
+    </div>
+
+    <!-- Step C: Final Certificate Display -->
+    <div id="cert-box">
+        <div class="status-badge">✓ SUCCESS: AUTHENTIC CERTIFICATE VERIFIED</div>
+        <br>
+        <div style="background: white; padding: 20px; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: inline-block;">
+            <img src="my_certificate_image.png" alt="NPTEL Certificate">
+        </div>
+    </div>
+
+</body>
+</html>
